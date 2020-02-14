@@ -57,10 +57,11 @@ describe http('https://' +ip +'/server-status', ssl_verify: false) do
   its('status') { should cmp 403 }
 end
 
+describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module' | grep -o http_module") do
+  #describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
+  #its('stdout') { should match '^ http_module \((static|shared)\)' }
+  its('stdout') { should match 'http_module' }
 
-describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
-  its('stdout') { should match '^ http_module \((static|shared)\)' }
-  its('stdout') { should match '.*' }
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
