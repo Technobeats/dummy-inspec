@@ -57,30 +57,21 @@ describe http('https://' +ip +'/server-status', ssl_verify: false) do
   its('status') { should cmp 403 }
 end
 
+# dummy test a postive to avoid false negatives for disabled modules
 describe command("sudo httpd -t -D DUMP_MODULES") do
-  #describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module' | grep -o http_module >&1") do
-  #describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
   its('stdout') { should match '^ http_module \((static|shared)\)' }
-  its('stdout') { should eq 'http_module' }
   its('exit_status') { should eq 0 }
 
 end
 
-describe command("echo hello") do
-  #describe command("httpd -t -D DUMP_MODULES ") do
-  its('stdout') { should match '^ http_module \((static|shared)\)' }
-  its('stdout') { should eq 'hello' }
-
-end
-
-describe command("httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
   its('stdout') { should_not match '^\sinfo_module' }
 end
 
-describe command("httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
   its('stdout') { should_not match '^\suserdir_module' }
 end
 
-describe command("httpd -t -D DUMP_MODULES | grep -E '^ autoindex_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ autoindex_module'") do
   its('stdout') { should_not match '^\sautoindex_module' }
 end
