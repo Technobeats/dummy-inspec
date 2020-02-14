@@ -64,14 +64,17 @@ describe command("sudo httpd -t -D DUMP_MODULES") do
 
 end
 
-describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES'") do
   its('stdout') { should_not match '^\sinfo_module' }
+  its('exit_status') { should eq 0 }
 end
 
 describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
   its('stdout') { should_not match '^\suserdir_module' }
+  its('exit_status') { should eq 0 }
 end
 
 describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ autoindex_module'") do
   its('stdout') { should_not match '^\sautoindex_module' }
+  its('exit_status') { should eq 0 }
 end
