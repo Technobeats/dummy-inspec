@@ -15,6 +15,11 @@ describe port(443) do
   its('processes') {should include 'httpd'}
 end
 
+describe port(22) do
+  it { should be_listening }
+  its('processes') {should include 'ssh'}
+end
+
 describe file('/etc/httpd/conf.d/welcome.conf') do
   it { should_not exist }
 end
@@ -66,15 +71,15 @@ end
 
 describe command("sudo httpd -t -D DUMP_MODULES'") do
   its('stdout') { should_not match '^\sinfo_module' }
-  its('exit_status') { should eq 0 }
+  its('exit_status') { should eq 1 }
 end
 
-describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES") do
   its('stdout') { should_not match '^\suserdir_module' }
-  its('exit_status') { should eq 0 }
+  its('exit_status') { should eq 1 }
 end
 
-describe command("sudo httpd -t -D DUMP_MODULES | grep -E '^ autoindex_module'") do
+describe command("sudo httpd -t -D DUMP_MODULES") do
   its('stdout') { should_not match '^\sautoindex_module' }
-  its('exit_status') { should eq 0 }
+  its('exit_status') { should eq 1 }
 end
