@@ -57,7 +57,7 @@ describe http('https://' +ip +'/server-status', ssl_verify: false) do
   its('status') { should cmp 403 }
 end
 
-describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module' | grep -o http_module > 2>&1") do
+describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module' | grep -o http_module >&1") do
   #describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
   #its('stdout') { should match '^ http_module \((static|shared)\)' }
   its('stdout') { should eq 'http_module' }
