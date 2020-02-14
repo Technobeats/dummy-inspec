@@ -7,12 +7,12 @@ end
 
 describe port(80) do
   it { should be_listening }
-  its('processes') {should include 'httpd'}
+  its('processes') {should include 'http'}
 end
 
 describe port(443) do
   it { should be_listening }
-  its('processes') {should include 'httpd'}
+  its('processes') {should include 'http'}
 end
 
 describe file('/etc/httpd/conf.d/welcome.conf') do
