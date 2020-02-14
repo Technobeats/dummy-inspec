@@ -59,7 +59,7 @@ end
 
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
-  #its('stdout') { should match '^ http_module \(\b(shared|static)\b\)' }
+  its('stdout') { should match '^ http_module \((shared|static)\)' }
   its('stdout') { should match '.*' }
 end
 
