@@ -68,15 +68,15 @@ end
 
 describe command("sudo httpd -t -D DUMP_MODULES'") do
   its('stdout') { should_not match '^\sinfo_module' }
-  its('exit_status') { should eq 1 }
+  its('exit_status') { should eq 0 }
 end
 
 describe command("sudo httpd -t -D DUMP_MODULES") do
   its('stdout') { should_not match '^\suserdir_module' }
-  its('exit_status') { should eq 1 }
+  its('exit_status') { should eq 0 }
 end
 
 describe command("sudo httpd -t -D DUMP_MODULES") do
   its('stdout') { should_not match '^\sautoindex_module' }
-  its('exit_status') { should eq 1 }
+  its('exit_status') { should eq 0 }
 end
