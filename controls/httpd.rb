@@ -60,12 +60,12 @@ end
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module' | grep -o http_module") do
   #describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
   #its('stdout') { should match '^ http_module \((static|shared)\)' }
-  its('stdout') { should match 'http_module' }
+  its('stdout') { should eq 'http_module' }
 
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
-  its('stdout') { should_not eq '^\sinfo_module' }
+  its('stdout') { should_not match '^\sinfo_module' }
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
