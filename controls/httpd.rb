@@ -59,18 +59,18 @@ end
 
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ http_module'") do
-  its('stdout') { should match '^ http_module ((shared|static))' }
+  its('stdout') { should match '^\shttp_module\s\((shared|static)\)' }
   its('stdout') { should match '.*' }
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ info_module'") do
-  its('stdout') { should_not match '^ info_module' }
+  its('stdout') { should_not match '^\sinfo_module' }
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ userdir_module'") do
-  its('stdout') { should_not match '^ userdir_module' }
+  its('stdout') { should_not match '^\suserdir_module' }
 end
 
 describe command("httpd -t -D DUMP_MODULES | grep -E '^ autoindex_module'") do
-  its('stdout') { should_not match '^ autoindex_module' }
+  its('stdout') { should_not match '^\sautoindex_module' }
 end
